@@ -23,7 +23,8 @@ http://www.mulesoft.org/schema/mule/xml http://www.mulesoft.org/schema/mule/xml/
         <db:select config-ref="Derby_Configuration" doc:name="Database">
             <db:parameterized-query><![CDATA[select * from FLIGHTS]]></db:parameterized-query>
         </db:select>
-        <mulexml:object-to-xml-transformer doc:name="Object to XML"/>
+        <json:object-to-json-transformer doc:name="Object to JSON"/>
+        <set-property propertyName="#['Content-Type']" value="#['application/json']" doc:name="Property"/>
         <jms:outbound-endpoint queue="flights" connector-ref="Active_MQ" doc:name="JMS"/>
     </flow>
     <flow name="maven-projectFlow">
